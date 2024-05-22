@@ -4,11 +4,14 @@ import Navbar from "../Pages/Shared/Navbar/Navbar";
 
 const Main = () => {
     return (
-        <div>
-            <Navbar></Navbar>
-            <Outlet></Outlet>
-            <Footer></Footer>
-        </div>
+        <>
+            <div className='max-w-screen-xl mx-auto'>
+                <Navbar></Navbar>
+                <Outlet></Outlet>
+            </div>
+                <Footer></Footer>
+
+        </>
     );
 };
 

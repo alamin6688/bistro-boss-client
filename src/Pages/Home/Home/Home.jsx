@@ -1,3 +1,4 @@
+import Contact from "../../Contact/Contact";
 import Banner from "../Banner/Banner";
 import Category from "../Category/Category";
 import Featured from "../Featured/Featured";
@@ -11,6 +12,7 @@ const Home = () => {
             <Banner></Banner>
             <Category></Category>
             <PopularMenu></PopularMenu>
+            <Contact></Contact>
             <Featured></Featured>
             <Testimonials></Testimonials>
         </div>

@@ -3,11 +3,9 @@ import { Link } from "react-router-dom";
 const Navbar = () => {
 
     const navLinks = <>
-    <Link to="/" className='mr-2'>Home</Link>
-    <Link className='mr-2'>Contact Us</Link>
-    <Link className='mr-2'>Dashboard</Link>
-    <Link to="/menu" className='mr-2'>Our Menu </Link>
-    <Link className='mr-2'>Our Shop  </Link>
+    <Link to="/" className='mr-6 text-yellow-400 font-bold'>Home</Link>
+    <Link to="/menu" className='mr-6'>Our Menu </Link>
+    <Link to="/order/salad" className='mr-6'>Order Food  </Link>
     </>
 
   return (
@@ -33,7 +31,7 @@ const Navbar = () => {
             </div>
             <ul
               tabIndex={0}
-              className="menu menu-sm text-black dropdown-content mt-3 z-[1] p-2 shadow bg-gray-200 rounded-box w-52"
+              className="menu menu-sm text-black dropdown-content mt-3 z-[1] p-4 shadow space-y-1 bg-gray-200 rounded-box w-52"
             >
                 {navLinks}
             </ul>

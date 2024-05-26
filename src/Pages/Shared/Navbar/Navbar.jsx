@@ -21,7 +21,7 @@ const Navbar = () => {
     <Link to="/menu" className='mr-6'>Our Menu </Link>
     <Link to="/order/salad" className='mr-6'>Order Food  </Link>
     <Link to="/secret" className='mr-6'>Secret </Link>
-    <Link to="/" className='mr-6'>
+    <Link to="/dashboard/cart" className='mr-6'>
       <div className="flex items-center gap-1">
         <FaShoppingCart/>
       <div className="badge badge-secondary">+{cart.length}</div>

@@ -4,59 +4,68 @@ import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../provider/AuthProvider";
 import Swal from "sweetalert2";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import logoImg from "../../assets/others/authentication2.png";
+import SocialLogin from "../../Components/SocialLogin/SocialLogin";
 
 const SignUp = () => {
-  const {register,handleSubmit,reset, formState: { errors }} = useForm();
-
-  const {createUser, updateUserProfile} = useContext(AuthContext);
+  const axiosPublic = useAxiosPublic();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
+  const { createUser, updateUserProfile } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const onSubmit = (data) => {
-    console.log(data);
-    createUser(data.email, data.password)
-    .then(result => {
-        const loggedUser = result.user;
-        console.log(loggedUser);
-        updateUserProfile(data.name, data.photoURL)
-          .then(() => {
-              console.log('user profile info updated')
+    createUser(data.email, data.password).then((result) => {
+      const loggedUser = result.user;
+      console.log(loggedUser);
+      updateUserProfile(data.name, data.photoURL)
+        .then(() => {
+          // Create user entry in the database
+          const userInfo = {
+            name: data.name,
+            email: data.email,
+          };
+          axiosPublic.post("/users", userInfo).then((res) => {
+            if (res.data.insertedId) {
               reset();
               Swal.fire({
-                  position: 'top-end',
-                  icon: 'success',
-                  title: 'User created successfully.',
-                  showConfirmButton: false,
-                  timer: 1500
+                position: "center",
+                icon: "success",
+                title: "User created successfully.",
+                showConfirmButton: false,
+                timer: 1500,
               });
-              navigate('/');
-          })
-          .catch(error => console.log(error))
+              navigate("/");
+            }
+          });
+        })
+        .catch((error) => console.log(error));
     });
-    }
+  };
 
   return (
     <>
-    <Helmet>
+      <Helmet>
         <title>Bistro Boss | Sign Up</title>
-    </Helmet>
+      </Helmet>
       <div className="hero min-h-screen bg-base-200">
         <div className="hero-content flex-col lg:flex-row-reverse">
-          <div className="text-center md:w-1/2 lg:text-left">
-            <h1 className="text-5xl font-bold">Sign Up now!</h1>
-            <p className="py-6">
-              Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
-              excepturi exercitationem quasi. In deleniti eaque aut repudiandae
-              et a id nisi.
-            </p>
+          <div className="text-center w-full lg:text-left">
+            <img src={logoImg} alt="" />
           </div>
-          <div className="card w-full md:w-1/2 max-w-sm shadow-2xl bg-base-100">
+          <div className="card w-full max-w-sm shadow-2xl bg-base-100">
             <div className="text-center pt-8">
               <h3 className="text-4xl font-bold">Sign Up</h3>
             </div>
             <form onSubmit={handleSubmit(onSubmit)} className="card-body">
               <div className="form-control">
                 <label className="label">
-                  <span className="label-text">Name</span>
+                  <span className="label-text font-bold">Name</span>
                 </label>
                 <input
                   type="text"
@@ -71,7 +80,7 @@ const SignUp = () => {
               </div>
               <div className="form-control">
                 <label className="label">
-                  <span className="label-text">PhotoURL</span>
+                  <span className="label-text font-bold">PhotoURL</span>
                 </label>
                 <input
                   type="text"
@@ -86,7 +95,7 @@ const SignUp = () => {
               </div>
               <div className="form-control">
                 <label className="label">
-                  <span className="label-text">Email</span>
+                  <span className="label-text font-bold">Email</span>
                 </label>
                 <input
                   type="email"
@@ -101,7 +110,7 @@ const SignUp = () => {
               </div>
               <div className="form-control">
                 <label className="label">
-                  <span className="label-text">Password</span>
+                  <span className="label-text font-bold">Password</span>
                 </label>
                 <input
                   type="password"
@@ -142,17 +151,18 @@ const SignUp = () => {
                   value="Sign Up"
                 />
               </div>
+              <div className="text-center mt-4">
+                <p className="font-bold text-orange-400">
+                  <small>
+                    Already registered?{" "}
+                    <Link to="/login">
+                      <span className="underline text-orange-600">Go to Login</span>
+                    </Link>{" "}
+                  </small>
+                </p>
+              </div>
+                <SocialLogin></SocialLogin>
             </form>
-            <div className="text-center pb-4">
-              <p>
-                <small>
-                  Already registered?{" "}
-                  <Link to="/login">
-                    <span className="underline">Go to Login</span>
-                  </Link>{" "}
-                </small>
-              </p>
-            </div>
           </div>
         </div>
       </div>

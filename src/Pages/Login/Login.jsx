@@ -9,9 +9,10 @@ import { AuthContext } from "../../provider/AuthProvider";
 import Swal from "sweetalert2";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
+import logoImg from "../../assets/others/authentication2.png";
+import SocialLogin from "../../Components/SocialLogin/SocialLogin";
 
 const Login = () => {
-
   const [disabled, setDisabled] = useState(true);
   const { signIn } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -22,8 +23,6 @@ const Login = () => {
   useEffect(() => {
     loadCaptchaEnginge(6);
   }, []);
-
-
 
   const handleLogin = (event) => {
     event.preventDefault();
@@ -63,22 +62,17 @@ const Login = () => {
       </Helmet>
       <div className="hero min-h-screen bg-base-200">
         <div className="hero-content flex-col lg:flex-row">
-          <div className="text-center md:w-1/2 lg:text-left">
-            <h1 className="text-5xl font-bold">Login now!</h1>
-            <p className="py-6">
-              Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
-              excepturi exercitationem quasi. In deleniti eaque aut repudiandae
-              et a id nisi.
-            </p>
+          <div className="text-center w-full  lg:text-left">
+            <img src={logoImg} alt="" />
           </div>
-          <div className="card w-full md:w-1/2 max-w-sm shadow-2xl bg-base-100">
+          <div className="card w-full max-w-sm shadow-2xl bg-base-100">
             <div className="text-center pt-8">
               <h3 className="text-4xl font-bold">Login</h3>
             </div>
             <form onSubmit={handleLogin} className="card-body">
               <div className="form-control">
                 <label className="label">
-                  <span className="label-text">Email</span>
+                  <span className="label-text font-bold">Email</span>
                 </label>
                 <input
                   type="email"
@@ -90,7 +84,7 @@ const Login = () => {
               </div>
               <div className="form-control">
                 <label className="label">
-                  <span className="label-text">Password</span>
+                  <span className="label-text font-bold">Password</span>
                 </label>
                 <input
                   type="password"
@@ -100,7 +94,7 @@ const Login = () => {
                   required
                 />
                 <label className="label">
-                  <a href="#" className="label-text-alt link link-hover">
+                  <a href="#" className="label-text-alt font-semibold link link-hover">
                     Forgot password?
                   </a>
                 </label>
@@ -126,17 +120,20 @@ const Login = () => {
                   value="Login"
                 />
               </div>
+              <div className="text-center mt-4">
+                <p className="font-bold text-orange-400">
+                  <small>
+                    New Here?{" "}
+                    <Link to="/signUp">
+                      <span className="underline text-orange-600">
+                        Create a New Account
+                      </span>
+                    </Link>{" "}
+                  </small>
+                </p>
+              </div>
+              <SocialLogin></SocialLogin>
             </form>
-            <div className="text-center pb-4">
-              <p>
-                <small>
-                  New Here?{" "}
-                  <Link to="/signUp">
-                    <span className="underline">Create a New Account</span>
-                  </Link>{" "}
-                </small>
-              </p>
-            </div>
           </div>
         </div>
       </div>

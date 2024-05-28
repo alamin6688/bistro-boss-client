@@ -5,6 +5,7 @@ import { MdEmail, MdReviews, MdShoppingBag } from "react-icons/md";
 import { NavLink, Outlet } from "react-router-dom";
 import useCart from "../Hooks/useCart";
 import { ImSpoonKnife } from "react-icons/im";
+import useAdmin from "../Hooks/useAdmin";
 
 
 const Dashboard = () => {
@@ -12,7 +13,7 @@ const Dashboard = () => {
     const [cart] = useCart();
 
     // TODO: get Admin value from the database
-    const isAdmin = true;
+    const [isAdmin] = useAdmin();
 
     return (
         <div className="flex">

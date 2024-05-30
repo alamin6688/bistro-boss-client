@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import { FaTrashAlt, FaUsers } from "react-icons/fa";
 import Swal from "sweetalert2";
+import SectionTitle from "../../../Components/SectionTitle/SectionTitle";
 
 const AllUsers = () => {
   const axiosSecure = useAxiosSecure();
@@ -59,16 +60,19 @@ const AllUsers = () => {
 
   return (
     <div>
-      <div className="flex justify-evenly my-4">
-        <h2 className="text-3xl">All Users</h2>
-        <h2 className="text-3xl">Total Users: {users.length}</h2>
+      <SectionTitle
+        subHeading="---How many?---"
+        heading="MANAGE ALL USERS"
+      ></SectionTitle>
+      <div className="my-4">
+        <h2 className="text-3xl font-semibold italic">Total Users: {users.length}</h2>
       </div>
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto rounded-xl">
         <table className="table table-zebra w-full">
           {/* head */}
-          <thead>
+          <thead className="bg-[#D1A054] text-white">
             <tr>
-              <th></th> 
+              <th>No.</th> 
               <th>Name</th>
               <th>Email</th>
               <th>Role</th>

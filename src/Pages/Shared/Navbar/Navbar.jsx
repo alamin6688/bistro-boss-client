@@ -3,11 +3,13 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../../provider/AuthProvider";
 import { FaShoppingCart } from "react-icons/fa";
 import useCart from "../../../Hooks/useCart";
+import useAdmin from "../../../Hooks/useAdmin";
 
 
 const Navbar = () => {
 
     const {user, logOut} = useContext(AuthContext);
+    const [isAdmin] = useAdmin();
     const [cart] = useCart();
 
     const handleLogout = () =>{
@@ -19,19 +21,23 @@ const Navbar = () => {
     const navLinks = <>
     <Link to="/" className='mr-6 text-yellow-400 font-bold'>Home</Link>
     <Link to="/menu" className='mr-6'>Our Menu </Link>
-    <Link to="/order/salad" className='mr-6'>Order Food  </Link>
-    <Link to="/secret" className='mr-6'>Secret </Link>
+    <Link to="/order/salad" className='mr-6'>Order Food</Link>
+    {
+      user && isAdmin && 
+        <Link to="/dashboard/adminHome" className="mr-6">Dashboard</Link>
+    }
+    {
+      user && !isAdmin && 
+        <Link to="/dashboard/userHome" className="mr-6">Dashboard</Link>
+    }
     <Link to="/dashboard/cart" className='mr-6'>
       <div className="flex items-center gap-1">
         <FaShoppingCart/>
       <div className="badge badge-secondary">+{cart.length}</div>
       </div>
     </Link>
-
-
     {
       user? <>
-      {/* <span className="mr-6">{user?.displayName}</span> */}
       <Link onClick={handleLogout}>Logout</Link>
       </> : 
       <>
@@ -76,7 +82,9 @@ const Navbar = () => {
           </ul>
         </div>
         <div className="navbar-end">
-          <a className="btn">Button</a>
+          <button className="btn bg-yellow-400 hover:bg-yellow-500 text-black border-none hover:font-bold">
+            <Link to="/order/salad">Get Started</Link>
+          </button>
         </div>
       </div>
     </>

@@ -45,7 +45,7 @@ const ManageItems = () => {
         subHeading="Hurry up"
       ></SectionTitle>
       <div>
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto rounded-xl">
           <table className="table w-full">
             {/* head */}
             <thead className="bg-[#D1A054] text-white">
@@ -75,7 +75,7 @@ const ManageItems = () => {
                     </div>
                   </td>
                   <td>{item.name}</td>
-                  <td className="text-right">${item.price}</td>
+                  <td>${item.price}</td>
                   <td>
                     <Link to={`/dashboard/updateItem/${item._id}`}>
                       <button className="btn btn-ghost btn-lg bg-orange-500">

@@ -2,6 +2,7 @@ import { FaTrashAlt } from "react-icons/fa";
 import useCart from "../../../Hooks/useCart";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import { Link } from "react-router-dom";
 
 const Cart = () => {
   const [cart, refetch] = useCart();
@@ -17,11 +18,9 @@ const Cart = () => {
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
       confirmButtonText: "Yes, delete it!",
-    })
-    .then((result) => {
-      if (result.isConfirmed){
-        axiosSecure.delete(`/carts/${id}`)
-        .then((res) => {
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure.delete(`/carts/${id}`).then((res) => {
           if (res.data.deletedCount > 0) {
             refetch();
             Swal.fire({
@@ -40,9 +39,17 @@ const Cart = () => {
       <div className="flex justify-between items-center">
         <h2 className="md:text-3xl font-bold">Total Orders: {cart.length}</h2>
         <h2 className="md:text-3xl font-bold">Total Price: ${totalPrice}</h2>
-        <button className="btn btn-outline border-0 border-b-4 text-slate-900 hover:text-yellow-400 hover:border-b-4 hover:border-yellow-400 font-bold bg-[#E8E8E8] uppercase">
-          Pay Now
-        </button>
+        {cart.length ? (
+          <Link to="/dashboard/payment">
+            <button className="btn btn-outline border-0 border-b-4 text-slate-900 hover:text-yellow-400 hover:border-b-4 hover:border-yellow-400 font-bold bg-[#E8E8E8] uppercase">
+              Pay Now
+            </button>
+          </Link>
+        ) : (
+          <button disabled className="btn btn-outline border-0 border-b-4 text-slate-900 hover:text-yellow-400 hover:border-b-4 hover:border-yellow-400 font-bold bg-[#E8E8E8] uppercase">
+            Pay Now
+          </button>
+        )}
       </div>
       <div className="overflow-x-auto w-[80%] mx-auto md:w-full bg-base-100 mt-8">
         <table className="table">

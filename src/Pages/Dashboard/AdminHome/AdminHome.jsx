@@ -20,32 +20,32 @@ const AdminHome = () => {
         <span>Hi, Welcome </span>
         {user?.displayName ? user.displayName : "Back"}
       </h2>
-      <div className="stats shadow">
+      <div className="stats shadow flex">
         <div className="stat">
           <div className="stat-figure text-secondary">
-            <FaDollarSign className="text-4xl text-blue-600"></FaDollarSign>
+            <FaDollarSign className="text-4xl text-green-600"></FaDollarSign>
           </div>
-          <div className="stat-title">Revenue</div>
+          <div className="stat-title font-semibold">Revenue</div>
           <div className="stat-value">{stats.revenue}</div>
-          <div className="stat-desc">Jan 1st - Feb 1st</div>
+          <div className="stat-desc font-bold">Jan 1st - Feb 1st</div>
         </div>
 
         <div className="stat">
           <div className="stat-figure text-secondary">
-            <FaUsers className="text-4xl text-blue-600"></FaUsers>
+            <FaUsers className="text-4xl text-gray-600"></FaUsers>
           </div>
-          <div className="stat-title">Users</div>
+          <div className="stat-title font-semibold">Users</div>
           <div className="stat-value">{stats.users}</div>
-          <div className="stat-desc">↗︎ 400 (22%)</div>
+          <div className="stat-desc font-bold">↗︎ 400 (22%)</div>
         </div>
 
         <div className="stat">
           <div className="stat-figure text-secondary">
-            <FaBook className="text-4xl text-blue-600"></FaBook>
+            <FaBook className="text-4xl text-orange-600"></FaBook>
           </div>
-          <div className="stat-title">Menu Items</div>
+          <div className="stat-title font-semibold">Menu Items</div>
           <div className="stat-value">{stats.menuItems}</div>
-          <div className="stat-desc">↗︎ 400 (22%)</div>
+          <div className="stat-desc font-bold">↗︎ 400 (22%)</div>
         </div>
 
         <div className="stat">
@@ -64,9 +64,9 @@ const AdminHome = () => {
               ></path>
             </svg>
           </div>
-          <div className="stat-title">Orders</div>
+          <div className="stat-title font-semibold">Orders</div>
           <div className="stat-value">{stats.orders}</div>
-          <div className="stat-desc">↘︎ 90 (14%)</div>
+          <div className="stat-desc font-bold">↘︎ 90 (14%)</div>
         </div>
       </div>
     </div>
